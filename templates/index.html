@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Location</title>
+</head>
+<body>
+    <h1>الحصول على موقعك</h1>
+    <button id="getLocation">الحصول على الموقع</button>
+    <p id="location">جاري الحصول على الموقع...</p>
+
+    <script>
+        document.getElementById("getLocation").addEventListener("click", async () => {
+            document.getElementById("location").innerText = "جاري المعالجة...";
+            try {
+                const response = await fetch("/get-location");
+                const data = await response.json();
+                document.getElementById("location").innerText = `الموقع: ${data.location}`;
+            } catch (error) {
+                document.getElementById("location").innerText = "حدث خطأ أثناء الحصول على الموقع.";
+                console.error(error);
+            }
+        });
+    </script>
+</body>
+</html>
